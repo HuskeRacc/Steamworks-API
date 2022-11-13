@@ -735,8 +735,8 @@ MonoBehaviour:
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
     Address: 90.206.56.221
-    Port: 27015
-    ServerListenAddress: 
+    Port: 27016
+    ServerListenAddress: 90.206.56.221
   DebugSimulator:
     PacketDelayMS: 0
     PacketJitterMS: 0
