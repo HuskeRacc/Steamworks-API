@@ -9,6 +9,7 @@ public class PlayerMovement : NetworkBehaviour
     [Header("Assignables")]
     public Transform playerCam;
     public Transform orientation;
+    public GameObject playerGFX;
 
     [Header("Other")]
     private Rigidbody rb;
@@ -209,6 +210,7 @@ public class PlayerMovement : NetworkBehaviour
         //Perform the rotations
         playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
         orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
+        playerGFX.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
     }
 
     private void CounterMovement(float x, float y, Vector2 mag)
