@@ -1,9 +1,10 @@
+using Mirror;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     [Header("Assignables")]
     public Transform playerCam;
@@ -67,13 +68,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if (!IsOwner) return;
+        if(!hasAuthority) { return; }
         Movement();
     }
 
     private void Update()
     {
-        //if (!IsOwner) return;
+        if (!hasAuthority) { return; }
         MyInput();
         Look();
     }
