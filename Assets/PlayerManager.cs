@@ -13,6 +13,11 @@ public class PlayerManager : NetworkBehaviour
     Camera mainCam;
     public GameObject cam;
 
+    public override void OnStartAuthority()
+    {
+        enabled = true;
+    }
+
     private void Start()
     {
         if (Camera.main != null)

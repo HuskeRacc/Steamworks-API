@@ -7,10 +7,15 @@ using UnityEngine.UI;
 
 public class PlayerMovement : NetworkBehaviour
 {
+
+    [Header("Debug")]
+    [SerializeField] private bool debug = false;
+
     [Header("Assignables")]
     public Transform playerCam;
     public Transform orientation;
     public GameObject playerGFX;
+    public Animator animator;
 
     [Header("Other")]
     private Rigidbody rb;
@@ -35,7 +40,6 @@ public class PlayerMovement : NetworkBehaviour
     private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
     private Vector3 playerScale;
 
-
     [Header("Jumping")]
     public float jumpForce = 550f;
     private bool readyToJump = true;
@@ -47,12 +51,17 @@ public class PlayerMovement : NetworkBehaviour
     public bool stamina;
 
     [Header("Input")]
-    float x, y;
+    public float x, y;
     bool jumping, sprinting, crouching;
 
     [Header("Sliding")]
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
+
+    public override void OnStartAuthority()
+    {
+        enabled = true;
+    }
 
     void Awake()
     {
@@ -62,6 +71,7 @@ public class PlayerMovement : NetworkBehaviour
     void Start()
     {
         playerScale = transform.localScale;
+        if(!debug) { return; }
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -165,6 +175,7 @@ public class PlayerMovement : NetworkBehaviour
         //Apply forces to move player
         rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
         rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier);
+
     }
 
     private void Jump()
