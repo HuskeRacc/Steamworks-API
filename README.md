@@ -3,7 +3,7 @@ A multiplayer unity project by Huske.
 
 Installation instructions:
 1. Extract rar file to a location of your choosing.
-2. If you wish to play in multiplayer set WaveGame.exe as a non-steam game
+2. If you wish to play multiplayer you may need to set WaveGame.exe as a non-steam game to access the steam overlay.
 3. Play solo or Invite friends via steam overlay! (Friends can also join you)
 
 Information:
