@@ -106,12 +106,13 @@ public class PlayerMovement : NetworkBehaviour
         jumping = Input.GetButton("Jump");
         crouching = Input.GetKey(KeyCode.LeftControl);
         sprinting = Input.GetKey(KeyCode.LeftShift);
-
+        /*
         //Crouching
         if (Input.GetKeyDown(KeyCode.LeftControl))
             StartCrouch();
         if (Input.GetKeyUp(KeyCode.LeftControl))
             StopCrouch();
+        */
         if (Input.GetKeyDown(KeyCode.LeftShift))
             StartSprint();
         if (Input.GetKeyUp(KeyCode.LeftShift))

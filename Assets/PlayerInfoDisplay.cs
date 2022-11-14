@@ -15,6 +15,8 @@ public class PlayerInfoDisplay : NetworkBehaviour
 
     protected Callback<AvatarImageLoaded_t> avatarImageLoaded;
 
+    public bool collected;
+
     #region Server
 
     public void SetSteamId(ulong steamId)

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f59445212d3bc64a957005ba73389d0, type: 3}
+  m_Name: Character1
+  m_EditorClassIdentifier: 
+  characterName: Nardoragon
+  characterPreviewPrefab: {fileID: 8067719309829019247, guid: fe112457fa860e74f99c558a3c72b6fa, type: 3}
+  gameplayCharacterPrefab: {fileID: 8067719309829019247, guid: acfd897abbff4be44b1ba0c27abdac91, type: 3}
