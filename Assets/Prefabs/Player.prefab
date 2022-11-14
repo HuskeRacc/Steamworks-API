@@ -4175,7 +4175,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6761825287515426324}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.95, z: -0.01}
+  m_LocalPosition: {x: 0, y: -1.01, z: -0.01}
   m_LocalScale: {x: 1.5, y: 1, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4197,7 +4197,7 @@ Animator:
   m_GameObject: {fileID: 6761825287515426324}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ad9d1036173cc4b409702a7b55eeb57a, type: 3}
-  m_Controller: {fileID: 9100000, guid: a8555c0cff30527479e32562cef9141f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 01904f6260dc9594884bd90b7fcdd842, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5179,6 +5179,7 @@ GameObject:
   - component: {fileID: 8067719309829019245}
   - component: {fileID: 3523959438700095756}
   - component: {fileID: 1447293086584205595}
+  - component: {fileID: 2677113409732057151}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -5193,8 +5194,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8067719309829019247}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: 0, y: 1.664, z: 1.75}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5204,7 +5205,7 @@ Transform:
   - {fileID: 6241150059210871982}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8067719309829019217
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5427,7 +5428,7 @@ MonoBehaviour:
   playerGFX: {fileID: 6761825287515426324}
   animator: {fileID: 35228618444623572}
   moveSpeed: 2250
-  maxSpeed: 10
+  maxSpeed: 5
   grounded: 0
   whatIsGround:
     serializedVersion: 2
@@ -5439,6 +5440,8 @@ MonoBehaviour:
   jumpForce: 275
   sprintSpeed: 0
   stamina: 0
+  x: 0
+  y: 0
 --- !u!114 &3523959438700095756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5474,6 +5477,23 @@ MonoBehaviour:
   syncInterval: 0.1
   profileImage: {fileID: 1132829492719719147}
   displayNameText: {fileID: 1993737718585984614}
+--- !u!114 &2677113409732057151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8067719309829019247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 1
+  animator: {fileID: 35228618444623572}
 --- !u!1 &8067719310506890811
 GameObject:
   m_ObjectHideFlags: 0

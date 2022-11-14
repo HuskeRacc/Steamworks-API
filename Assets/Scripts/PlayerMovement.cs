@@ -37,6 +37,7 @@ public class PlayerMovement : NetworkBehaviour
     [Header("Crouch & Slide")]
     public float slideForce = 400;
     public float slideCounterMovement = 0.2f;
+    public CapsuleCollider capsuleColl;
     private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
     private Vector3 playerScale;
 
@@ -110,7 +111,7 @@ public class PlayerMovement : NetworkBehaviour
 
     private void StartCrouch()
     {
-        transform.localScale = crouchScale;
+        capsuleColl.transform.localScale = crouchScale;
         transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
         if (rb.velocity.magnitude > 0.5f)
         {
@@ -123,7 +124,7 @@ public class PlayerMovement : NetworkBehaviour
 
     private void StopCrouch()
     {
-        transform.localScale = playerScale;
+        capsuleColl.transform.localScale = playerScale;
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
     }
 
@@ -176,6 +177,9 @@ public class PlayerMovement : NetworkBehaviour
         rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
         rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier);
 
+        animator.SetFloat("Forward", yMag);
+        animator.SetFloat("Sideways", xMag);
+
     }
 
     private void Jump()
@@ -187,6 +191,7 @@ public class PlayerMovement : NetworkBehaviour
             //Add jump forces
             rb.AddForce(Vector2.up * jumpForce * 1.5f);
             rb.AddForce(normalVector * jumpForce * 0.5f);
+            animator.SetBool("Jumping", true);
 
             //If jumping while falling, reset y velocity.
             Vector3 vel = rb.velocity;
@@ -195,12 +200,14 @@ public class PlayerMovement : NetworkBehaviour
             else if (rb.velocity.y > 0)
                 rb.velocity = new Vector3(vel.x, vel.y / 2, vel.z);
 
+
             Invoke(nameof(ResetJump), jumpCooldown);
         }
     }
 
     private void ResetJump()
     {
+        animator.SetBool("Jumping", false);
         readyToJump = true;
     }
 
