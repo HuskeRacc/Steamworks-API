@@ -129,7 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh74198
+  m_Name: pb_Mesh105162
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -696,7 +696,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2063684536}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 1a9cba4d567daef4a9aafe61ee920446, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2704,9 +2704,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1630178475679600208, guid: 2679c9ad0de627b49b6476f1d2b9c59c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630178475679600209, guid: 2679c9ad0de627b49b6476f1d2b9c59c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1630178475679600216, guid: 2679c9ad0de627b49b6476f1d2b9c59c, type: 3}
       propertyPath: m_Name
       value: NetworkManagerSTEAMWORKS
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630178475679600216, guid: 2679c9ad0de627b49b6476f1d2b9c59c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1630178475679600219, guid: 2679c9ad0de627b49b6476f1d2b9c59c, type: 3}
       propertyPath: m_RootOrder
@@ -2752,6 +2764,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1630178475679600223, guid: 2679c9ad0de627b49b6476f1d2b9c59c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630178475679600223, guid: 2679c9ad0de627b49b6476f1d2b9c59c, type: 3}
+      propertyPath: offlineScene
+      value: Assets/Scenes/GameScene.unity
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2768,6 +2788,14 @@ PrefabInstance:
     - target: {fileID: 4706397053622073578, guid: b8b697a4bd608954a965905a98ccf560, type: 3}
       propertyPath: m_Name
       value: NetworkManagerTelepathy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706397053622073578, guid: b8b697a4bd608954a965905a98ccf560, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706397053622073580, guid: b8b697a4bd608954a965905a98ccf560, type: 3}
+      propertyPath: offlineScene
+      value: Assets/Scenes/GameScene.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4706397053622073581, guid: b8b697a4bd608954a965905a98ccf560, type: 3}
       propertyPath: m_RootOrder

@@ -1,10 +1,12 @@
 using Mirror;
 using Steamworks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SteamLobby : MonoBehaviour
 {
-    [SerializeField] private GameObject buttons = null;
+    [SerializeField] private GameObject hostButton = null;
 
     private const string HostAddressKey = "HostAddress";
 
@@ -15,10 +17,11 @@ public class SteamLobby : MonoBehaviour
     protected Callback<GameLobbyJoinRequested_t> joinRequested;
     protected Callback<LobbyEnter_t> lobbyEntered;
 
+
     private void Start()
     {
         networkManager = GetComponent<NetworkManager>();
-
+        hostButton = GetComponentInChildren<Button>().gameObject;
         if(!SteamManager.Initialized) { return; }
 
         lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
@@ -29,15 +32,14 @@ public class SteamLobby : MonoBehaviour
 
     public void HostLobby()
     {
-        buttons.SetActive(false);
-
+        hostButton.SetActive(false);
         SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, networkManager.maxConnections);
     }
     private void OnLobbyCreated(LobbyCreated_t callback)
     {
         if(callback.m_eResult != EResult.k_EResultOK)
         {
-            buttons.SetActive(true);
+            hostButton.SetActive(true);
             return;
         }
 
@@ -49,6 +51,7 @@ public class SteamLobby : MonoBehaviour
             LobbyID,
             HostAddressKey,
             SteamUser.GetSteamID().ToString());
+
     }
 
     private void OnJoinRequest(GameLobbyJoinRequested_t callback)
@@ -65,6 +68,12 @@ public class SteamLobby : MonoBehaviour
         networkManager.networkAddress = hostAddress;
         networkManager.StartClient();
 
-        buttons.SetActive(false);
+
+        hostButton.SetActive(false);
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 }

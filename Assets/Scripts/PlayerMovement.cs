@@ -16,6 +16,7 @@ public class PlayerMovement : NetworkBehaviour
     public Transform orientation;
     public GameObject playerGFX;
     public Animator animator;
+    public CapsuleCollider capsuleColl;
 
     [Header("Other")]
     private Rigidbody rb;
@@ -33,13 +34,14 @@ public class PlayerMovement : NetworkBehaviour
     public float maxSlopeAngle = 35f;
     public float counterMovement = 0.175f;
     private float threshold = 0.01f;
+    public float maxSpeedSaved;
+    public float crouchSpeed;
 
     [Header("Crouch & Slide")]
     public float slideForce = 400;
     public float slideCounterMovement = 0.2f;
-    public CapsuleCollider capsuleColl;
-    private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
-    private Vector3 playerScale;
+    private float crouchScale = 1f;
+    private float playerScale;
 
     [Header("Jumping")]
     public float jumpForce = 550f;
@@ -71,7 +73,10 @@ public class PlayerMovement : NetworkBehaviour
 
     void Start()
     {
-        playerScale = transform.localScale;
+        crouchSpeed = maxSpeed / 2;
+        maxSpeedSaved = maxSpeed;
+        sprintSpeed = maxSpeed * 2;
+        playerScale = 2f;
         if(!debug) { return; }
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -107,11 +112,29 @@ public class PlayerMovement : NetworkBehaviour
             StartCrouch();
         if (Input.GetKeyUp(KeyCode.LeftControl))
             StopCrouch();
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+            StartSprint();
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+            StopSprint();
+    }
+
+    void StartSprint()
+    {
+        animator.SetBool("Running", true);
+        maxSpeed = sprintSpeed;
+    }
+
+    void StopSprint()
+    {
+        animator.SetBool("Running", false);
+        maxSpeed = maxSpeedSaved;
     }
 
     private void StartCrouch()
     {
-        capsuleColl.transform.localScale = crouchScale;
+        maxSpeed = crouchSpeed;
+        animator.SetBool("Crouching", true);
+        capsuleColl.height = crouchScale;
         transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
         if (rb.velocity.magnitude > 0.5f)
         {
@@ -124,7 +147,11 @@ public class PlayerMovement : NetworkBehaviour
 
     private void StopCrouch()
     {
-        capsuleColl.transform.localScale = playerScale;
+        animator.SetBool("Crouching", false);
+
+        maxSpeed = maxSpeedSaved;
+
+        capsuleColl.height = playerScale;
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
     }
 
@@ -147,12 +174,14 @@ public class PlayerMovement : NetworkBehaviour
         //Set max speed
         float maxSpeed = this.maxSpeed;
 
+        /*
         //If sliding down a ramp, add force down so player stays grounded and also builds speed
         if (crouching && grounded && readyToJump)
         {
             rb.AddForce(Vector3.down * Time.deltaTime * 3000);
             return;
         }
+        */
 
         //If speed is larger than maxspeed, cancel out the input so you don't go over max speed
         if (x > 0 && xMag > maxSpeed) x = 0;
@@ -171,7 +200,7 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         // Movement while sliding
-        if (grounded && crouching) multiplierV = 0f;
+        //if (grounded && crouching) multiplierV = 0f;
 
         //Apply forces to move player
         rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
@@ -184,7 +213,7 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Jump()
     {
-        if (grounded && readyToJump)
+        if (grounded && readyToJump && !crouching)
         {
             readyToJump = false;
 
