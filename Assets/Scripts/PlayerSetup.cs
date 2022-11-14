@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerSetup : NetworkBehaviour
+public class PlayerSetup : MonoBehaviour
 {
     [SerializeField] string noDrawLayerName = "PlayerGFX";
     [SerializeField] GameObject playerGFX;
     Camera sceneCamera;
-
+/*
     private void Start()
     {
         //Disable player GFX for local player
@@ -33,4 +32,5 @@ public class PlayerSetup : NetworkBehaviour
             SetLayerRecursively(child.gameObject, newLayer);
         }
     }
+*/
 }

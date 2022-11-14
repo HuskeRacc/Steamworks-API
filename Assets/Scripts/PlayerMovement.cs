@@ -2,9 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Netcode;
 
-public class PlayerMovement : NetworkBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Assignables")]
     public Transform playerCam;
@@ -68,13 +67,13 @@ public class PlayerMovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        if (!IsOwner) return;
+        //if (!IsOwner) return;
         Movement();
     }
 
     private void Update()
     {
-        if (!IsOwner) return;
+        //if (!IsOwner) return;
         MyInput();
         Look();
     }
