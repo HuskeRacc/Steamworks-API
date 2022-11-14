@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : NetworkBehaviour
 {
     [SerializeField]
     string dontDrawLayerName = "NoDraw";
@@ -11,6 +11,8 @@ public class PlayerManager : MonoBehaviour
     GameObject playerGFX;
 
     Camera mainCam;
+    public GameObject cam;
+
     private void Start()
     {
         if (Camera.main != null)
@@ -19,8 +21,12 @@ public class PlayerManager : MonoBehaviour
             mainCam.gameObject.SetActive(false);
         }
 
+        if (!isOwned) { return; }
+        cam.gameObject.SetActive(true);
+
         // Disable playerGFX for localplayer
         SetLayerRecursively(playerGFX, LayerMask.NameToLayer(dontDrawLayerName));
+        
     }
 
     void SetLayerRecursively(GameObject obj, int newLayer)

@@ -1265,18 +1265,18 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2317042801372496449}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000029355283}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.006666667}
+  m_LocalScale: {x: 0.6666667, y: 1, z: 0.6666667}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7196633780119580440}
   - {fileID: 2364072849881372329}
-  m_Father: {fileID: 8067719309829019246}
+  m_Father: {fileID: 6241150059210871982}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.3333334}
+  m_AnchoredPosition: {x: 0, y: 2.2833333}
   m_SizeDelta: {x: 2.9839, y: 0.6409}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3570498243049083974
@@ -4183,6 +4183,7 @@ Transform:
   - {fileID: 3396263519907328634}
   - {fileID: 7548765618893158783}
   - {fileID: 829547839489525238}
+  - {fileID: 6931584444212210716}
   m_Father: {fileID: 8067719309829019246}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5123,7 +5124,7 @@ GameObject:
   - component: {fileID: 8067719309391669566}
   - component: {fileID: 8067719309391669565}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: CameraHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5152,12 +5153,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8067719309391669567}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21895100bd161b040bb7d6392f7f99dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 8067719310643618178}
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
   player: {fileID: 8067719310817734322}
 --- !u!1 &8067719309829019247
 GameObject:
@@ -5172,10 +5175,10 @@ GameObject:
   - component: {fileID: 8067719309829019218}
   - component: {fileID: 8067719309829019216}
   - component: {fileID: 8067719309829019219}
-  - component: {fileID: 8067719309829019245}
   - component: {fileID: 4935694511315979728}
-  - component: {fileID: 3523959438700095756}
   - component: {fileID: 8107053005478840237}
+  - component: {fileID: 8067719309829019245}
+  - component: {fileID: 3523959438700095756}
   - component: {fileID: 1447293086584205595}
   m_Layer: 0
   m_Name: Player
@@ -5200,7 +5203,6 @@ Transform:
   - {fileID: 8067719310506890810}
   - {fileID: 8067719310817734322}
   - {fileID: 6241150059210871982}
-  - {fileID: 6931584444212210716}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -5304,6 +5306,51 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &4935694511315979728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8067719309829019247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 3021313204
+  serverOnly: 0
+  visible: 0
+  hasSpawned: 0
+--- !u!114 &8107053005478840237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8067719309829019247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 8067719309829019246}
+  clientAuthority: 1
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!114 &8067719309829019245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5335,23 +5382,6 @@ MonoBehaviour:
   jumpForce: 275
   sprintSpeed: 0
   stamina: 0
---- !u!114 &4935694511315979728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8067719309829019247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  _assetId: 3021313204
-  serverOnly: 0
-  visible: 0
-  hasSpawned: 0
 --- !u!114 &3523959438700095756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5364,36 +5394,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f0e3422c9a30a4abaae924468aedae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
   dontDrawLayerName: NoDraw
   playerGFX: {fileID: 6761825287515426324}
---- !u!114 &8107053005478840237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8067719309829019247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 1
-  syncMode: 0
-  syncInterval: 0
-  target: {fileID: 8067719309829019246}
-  clientAuthority: 1
-  onlySyncOnChange: 1
-  bufferResetMultiplier: 5
-  positionSensitivity: 0.01
-  rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
-  syncPosition: 1
-  syncRotation: 1
-  syncScale: 0
-  showGizmos: 0
-  showOverlay: 0
-  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  cam: {fileID: 8067719310643618178}
 --- !u!114 &1447293086584205595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5454,7 +5460,7 @@ GameObject:
   - component: {fileID: 8067719310643618176}
   - component: {fileID: 8067719310643618177}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

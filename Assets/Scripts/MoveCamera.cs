@@ -1,20 +1,13 @@
 using UnityEngine;
+using Mirror;
 
-using UnityEngine.SceneManagement;
-
-public class MoveCamera : MonoBehaviour
+public class MoveCamera : NetworkBehaviour
 {
-    public GameObject cam;
     public Transform player;
-
+    
     void Update()
-    {/*
-        if (!IsOwner)
-        {
-            cam.SetActive(false);
-            return;
-        }
-        */
+    {
+        if(!isOwned) { return; }
         transform.position = player.transform.position;
     }
 }

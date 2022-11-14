@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -65,16 +66,15 @@ public class PlayerMovement : NetworkBehaviour
         Cursor.visible = false;
     }
 
-
     private void FixedUpdate()
     {
-        if(!hasAuthority) { return; }
+        if(!isOwned) { return; }
         Movement();
     }
 
     private void Update()
     {
-        if (!hasAuthority) { return; }
+        if(!isOwned) { return; }
         MyInput();
         Look();
     }
