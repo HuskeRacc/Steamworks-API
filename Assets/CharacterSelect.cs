@@ -12,13 +12,16 @@ public class CharacterSelect : NetworkBehaviour
     [SerializeField] private TMP_Text characterNameText = default;
     [SerializeField] private float turnspeed = 90f;
     [SerializeField] private Character[] characters = default;
+    [SerializeField] private GameObject networkPlayer;
 
     private int currentCharacterIndex = 0;
     private List<GameObject> characterInstances = new List<GameObject>();
 
     public override void OnStartClient()
     {
-        if(characterPreviewParent.childCount == 0)
+        networkPlayer = GameObject.FindGameObjectWithTag("NetworkPlayer");
+        Destroy(networkPlayer);
+        if (characterPreviewParent.childCount == 0)
         {
             foreach (var character in characters)
             {

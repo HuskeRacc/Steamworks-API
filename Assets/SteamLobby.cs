@@ -71,9 +71,4 @@ public class SteamLobby : MonoBehaviour
 
         hostButton.SetActive(false);
     }
-
-    public void StartGame()
-    {
-        SceneManager.LoadScene(1, LoadSceneMode.Single);
-    }
 }

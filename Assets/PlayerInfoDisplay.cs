@@ -10,12 +10,16 @@ public class PlayerInfoDisplay : NetworkBehaviour
     [SyncVar(hook = nameof(HandleSteamIdUpdated))]
     private ulong steamId;
 
-    [SerializeField] private RawImage profileImage = null;
-    [SerializeField] private TMP_Text displayNameText = null;
+    [SerializeField] PlayerInfoDisplay localPlayerInfoDisplay;
+
+    public RawImage profileImage = null;
+    public TMP_Text displayNameText = null;
 
     protected Callback<AvatarImageLoaded_t> avatarImageLoaded;
 
-    public bool collected;
+    [SerializeField] GameObject localPlayer;
+
+
 
     #region Server
 

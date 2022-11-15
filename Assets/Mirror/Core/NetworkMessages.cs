@@ -144,7 +144,7 @@ namespace Mirror
                     // TODO: Figure out the correct channel
                     NetworkDiagnostics.OnReceive(message, channelId, endPos - startPos);
                 }
-
+                
                 // user handler exception should not stop the whole server
                 try
                 {
@@ -156,6 +156,7 @@ namespace Mirror
                     Debug.LogError($"Disconnecting connId={conn.connectionId} to prevent exploits from an Exception in MessageHandler: {e.GetType().Name} {e.Message}\n{e.StackTrace}");
                     conn.Disconnect();
                 }
+                
             };
 
         // version for handlers without channelId
