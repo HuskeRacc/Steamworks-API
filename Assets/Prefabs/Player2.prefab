@@ -5003,6 +5003,7 @@ GameObject:
   - component: {fileID: 7274407861702571926}
   - component: {fileID: 1109275583079129233}
   - component: {fileID: -6812603317988593538}
+  - component: {fileID: 8774779847856263435}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player
@@ -5317,7 +5318,7 @@ MonoBehaviour:
   cam: {fileID: 8067719310643618176}
   mask:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 1535
 --- !u!114 &-6812603317988593538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5336,6 +5337,22 @@ MonoBehaviour:
   noDrawLayerName: PlayerGFX
   playerGFX: {fileID: 5207022625674010975}
   remoteLayerName: RemotePlayer
+--- !u!114 &8774779847856263435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8067719309829019247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4866ba212b5e4594ebc70f8ca567340f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  maxHealth: 100
 --- !u!1 &8067719310506890811
 GameObject:
   m_ObjectHideFlags: 0

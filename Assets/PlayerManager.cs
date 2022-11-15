@@ -20,12 +20,6 @@ public class PlayerManager : NetworkBehaviour
 
     private void Start()
     {
-        if (Camera.main != null)
-        {
-            mainCam = Camera.main;
-            mainCam.gameObject.SetActive(false);
-        }
-
         if (!isOwned) { return; }
         cam.gameObject.SetActive(true);
 
