@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Android;
 using UnityEngine.UI;
 
 public class PlayerMovement : NetworkBehaviour
@@ -10,6 +11,7 @@ public class PlayerMovement : NetworkBehaviour
 
     [Header("Debug")]
     [SerializeField] private bool debug = false;
+    private bool paused = false;
 
     [Header("Assignables")]
     public Transform playerCam;
@@ -17,6 +19,7 @@ public class PlayerMovement : NetworkBehaviour
     public GameObject playerGFX;
     public Animator animator;
     public CapsuleCollider capsuleColl;
+    public MoveCamera moveCamera;
 
     [Header("Other")]
     private Rigidbody rb;
@@ -77,7 +80,7 @@ public class PlayerMovement : NetworkBehaviour
         maxSpeedSaved = maxSpeed;
         sprintSpeed = maxSpeed * 2;
         playerScale = 2f;
-        if(!debug) { return; }
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -101,11 +104,29 @@ public class PlayerMovement : NetworkBehaviour
     /// 
     private void MyInput()
     {
+        if(Input.GetKeyDown(KeyCode.Escape) && !paused)
+        {
+            Debug.Log("Paused");
+            paused = true;
+            moveCamera.enabled = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Debug.Log("Unpaused");
+            paused = false;
+            moveCamera.enabled = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
         jumping = Input.GetButton("Jump");
         crouching = Input.GetKey(KeyCode.LeftControl);
         sprinting = Input.GetKey(KeyCode.LeftShift);
+
         /*
         //Crouching
         if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -113,6 +134,7 @@ public class PlayerMovement : NetworkBehaviour
         if (Input.GetKeyUp(KeyCode.LeftControl))
             StopCrouch();
         */
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
             StartSprint();
         if (Input.GetKeyUp(KeyCode.LeftShift))
@@ -196,8 +218,8 @@ public class PlayerMovement : NetworkBehaviour
         // Movement in air
         if (!grounded)
         {
-            multiplier = 0.5f;
-            multiplierV = 0.5f;
+            multiplier = 1f;
+            multiplierV = 1f;
         }
 
         // Movement while sliding
@@ -221,7 +243,6 @@ public class PlayerMovement : NetworkBehaviour
             //Add jump forces
             rb.AddForce(Vector2.up * jumpForce * 1.5f);
             rb.AddForce(normalVector * jumpForce * 0.5f);
-            animator.SetBool("Jumping", true);
 
             //If jumping while falling, reset y velocity.
             Vector3 vel = rb.velocity;
@@ -237,7 +258,6 @@ public class PlayerMovement : NetworkBehaviour
 
     private void ResetJump()
     {
-        animator.SetBool("Jumping", false);
         readyToJump = true;
     }
 

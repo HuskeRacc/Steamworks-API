@@ -5035,7 +5035,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8067719309829019247}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 1a9cba4d567daef4a9aafe61ee920446, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5077,7 +5077,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!114 &4935694511315979728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5189,19 +5189,20 @@ MonoBehaviour:
   playerGFX: {fileID: 6761825287515426324}
   animator: {fileID: 7274407861702571926}
   capsuleColl: {fileID: 8067719309829019216}
+  moveCamera: {fileID: 2330427091431809295}
   moveSpeed: 2250
   maxSpeed: 5
   grounded: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
-  maxSlopeAngle: 35
+  maxSlopeAngle: 50
   counterMovement: 0.175
   maxSpeedSaved: 0
   crouchSpeed: 0
   slideForce: 400
   slideCounterMovement: 0.2
-  jumpForce: 275
+  jumpForce: 412
   sprintSpeed: 0
   stamina: 0
   x: 0
@@ -5261,7 +5262,7 @@ MonoBehaviour:
   syncInterval: 0.1
   weapon:
     name: Gune
-    damage: 10
+    damage: 40
     range: 100
   cam: {fileID: 8067719310643618176}
   mask:
@@ -5291,6 +5292,7 @@ MonoBehaviour:
   noDrawLayerName: PlayerGFX
   playerGFX: {fileID: 6761825287515426324}
   remoteLayerName: RemotePlayer
+  playerUIPrefab: {fileID: 2861217068446700455, guid: 2755b9ef74cee9a42ab652c63bf1439a, type: 3}
 --- !u!114 &8774779847856263435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5307,6 +5309,10 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   maxHealth: 100
+  disableOnDeath:
+  - {fileID: 8067719309829019245}
+  - {fileID: -1467383526657067852}
+  - {fileID: 2330427091431809295}
 --- !u!1 &8067719310506890811
 GameObject:
   m_ObjectHideFlags: 0

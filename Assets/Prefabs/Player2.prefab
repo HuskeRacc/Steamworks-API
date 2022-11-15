@@ -5334,8 +5334,14 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  componentsToDisable:
+  - {fileID: 8067719309829019245, guid: acfd897abbff4be44b1ba0c27abdac91, type: 3}
+  - {fileID: 8067719310643618176, guid: acfd897abbff4be44b1ba0c27abdac91, type: 3}
+  - {fileID: 8067719310643618177, guid: acfd897abbff4be44b1ba0c27abdac91, type: 3}
+  - {fileID: -1467383526657067852, guid: acfd897abbff4be44b1ba0c27abdac91, type: 3}
+  - {fileID: 3523959438700095756, guid: acfd897abbff4be44b1ba0c27abdac91, type: 3}
   noDrawLayerName: PlayerGFX
-  playerGFX: {fileID: 5207022625674010975}
+  playerGFX: {fileID: 6761825287515426324, guid: acfd897abbff4be44b1ba0c27abdac91, type: 3}
   remoteLayerName: RemotePlayer
 --- !u!114 &8774779847856263435
 MonoBehaviour:
@@ -5353,6 +5359,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   maxHealth: 100
+  disableOnDeath: []
 --- !u!1 &8067719310506890811
 GameObject:
   m_ObjectHideFlags: 0

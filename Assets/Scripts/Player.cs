@@ -1,26 +1,47 @@
 using Mirror;
 using UnityEngine;
+using System.Collections;
 
 public class Player : NetworkBehaviour
 {
     [SyncVar]
     private bool _isDead = false;
-    public bool isDead { get { return _isDead; } protected set { _isDead = value; } }
+    public bool IsDead { get { return _isDead; } protected set { _isDead = value; } }
 
     [SerializeField] private int maxHealth = 100;
 
     [SyncVar]
     private int currentHealth;
 
-    private void Awake()
+    [SerializeField] private Behaviour[] disableOnDeath;
+    private bool[] wasEnabled;
+
+    public void Setup()
     {
+        wasEnabled = new bool[disableOnDeath.Length];
+        for (int i = 0; i < wasEnabled.Length; i++)
+        {
+            wasEnabled[i] = disableOnDeath[i].enabled;
+        }
+
         SetDefaults();
+    }
+
+    private void Update()
+    {
+        if (!isLocalPlayer)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            RpcTakeDamage(9999);
+        }
     }
 
     [ClientRpc]
     public void RpcTakeDamage(int _amount)
     {
-        if (isDead) return;
+        if (IsDead) return;
 
 
         currentHealth -= _amount;
@@ -35,17 +56,48 @@ public class Player : NetworkBehaviour
 
     private void Die()
     {
-        isDead = true;
+        IsDead = true;
 
-        //Disable Components
+        for (int i = 0; i < disableOnDeath.Length; i++)
+        {
+            disableOnDeath[i].enabled = false;
+        }
+        
+        //Collider _col = GetComponent<Collider>();
+        //if (_col != null)
+        //    _col.enabled = false;
 
         Debug.Log(transform.name + " is Dead");
 
-        //Respawn
+        StartCoroutine(Respawn());
+    }
+
+    private IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(GameManager.instance.matchSettings.respawnTime);
+
+        SetDefaults();
+        Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
+        transform.position = _spawnPoint.position;
+        transform.rotation = _spawnPoint.rotation;
+
+        Debug.Log(transform.name + " Respawned");
     }
 
     public void SetDefaults()
     {
+        IsDead = false;
+
         currentHealth = maxHealth;
+
+        for (int i = 0; i < disableOnDeath.Length; i++)
+        {
+            disableOnDeath[i].enabled = wasEnabled[i];
+        }
+
+        
+        //Collider _col = GetComponent<Collider>();
+        //if (_col != null)
+        //    _col.enabled = true;
     }
 }

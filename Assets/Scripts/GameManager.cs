@@ -3,6 +3,24 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
+    public MatchSettings matchSettings;
+
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            Debug.LogError("There can only be one gamemanager in a scene");
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+
+    #region Player Track
+
     private const string PLAYER_ID_PREFIX = "Player ";
 
     private static Dictionary<string, Player> players = new Dictionary<string, Player>();
@@ -24,6 +42,9 @@ public class GameManager : MonoBehaviour
         return players[_playerID];
     }
 
+    #endregion
+
+    #region GUI
     private void OnGUI()
     {
         GUILayout.BeginArea(new Rect(200,200,200,500));
@@ -37,4 +58,6 @@ public class GameManager : MonoBehaviour
         GUILayout.EndVertical();
         GUILayout.EndArea();
     }
+
+    #endregion
 }
