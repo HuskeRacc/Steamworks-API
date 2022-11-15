@@ -11,9 +11,11 @@ public class PlayerSetup : NetworkBehaviour
 
     [SerializeField] string noDrawLayerName = "PlayerGFX";
     [SerializeField] GameObject playerGFX;
+    [SerializeField] GameObject localGFX;
     Camera sceneCamera;
 
     [SerializeField] string remoteLayerName = "RemotePlayer";
+    [SerializeField] string LocalGFXLayerName = "LocalGFX";
 
     [SerializeField] GameObject playerUIPrefab;
     private GameObject playerUIInstance;
@@ -37,6 +39,7 @@ public class PlayerSetup : NetworkBehaviour
             {
                 sceneCamera.gameObject.SetActive(false);
             }
+            SetLayerRecursively(localGFX, LayerMask.NameToLayer(LocalGFXLayerName));
         }
 
         sceneCamera = Camera.main;

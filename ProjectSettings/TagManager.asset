@@ -19,7 +19,7 @@ TagManager:
   - Hittable
   - LocalPlayer
   - RemotePlayer
-  - 
+  - LocalGFX
   - 
   - 
   - 

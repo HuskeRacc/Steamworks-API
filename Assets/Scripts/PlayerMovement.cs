@@ -8,16 +8,14 @@ using UnityEngine.UI;
 
 public class PlayerMovement : NetworkBehaviour
 {
-
-    [Header("Debug")]
-    [SerializeField] private bool debug = false;
-
     [Header("Assignables")]
     public Transform playerCam;
     public Transform orientation;
     public GameObject playerGFX;
+    public GameObject localGFX;
     public Animator animator;
     public CapsuleCollider capsuleColl;
+    public Vector3 viewModelOffset;
 
     [Header("Other")]
     private Rigidbody rb;
@@ -280,6 +278,7 @@ public class PlayerMovement : NetworkBehaviour
         playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
         orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
         playerGFX.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
+
     }
 
     private void CounterMovement(float x, float y, Vector2 mag)
