@@ -4928,6 +4928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21895100bd161b040bb7d6392f7f99dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paused: 0
   player: {fileID: 8067719309391669566}
 --- !u!1 &8067719309829019247
 GameObject:
@@ -5189,7 +5190,7 @@ MonoBehaviour:
   playerGFX: {fileID: 6761825287515426324}
   animator: {fileID: 7274407861702571926}
   capsuleColl: {fileID: 8067719309829019216}
-  moveCamera: {fileID: 2330427091431809295}
+  moveCamera: {fileID: 0}
   moveSpeed: 2250
   maxSpeed: 5
   grounded: 0

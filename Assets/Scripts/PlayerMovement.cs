@@ -11,7 +11,6 @@ public class PlayerMovement : NetworkBehaviour
 
     [Header("Debug")]
     [SerializeField] private bool debug = false;
-    private bool paused = false;
 
     [Header("Assignables")]
     public Transform playerCam;
@@ -19,7 +18,6 @@ public class PlayerMovement : NetworkBehaviour
     public GameObject playerGFX;
     public Animator animator;
     public CapsuleCollider capsuleColl;
-    public MoveCamera moveCamera;
 
     [Header("Other")]
     private Rigidbody rb;
@@ -28,6 +26,7 @@ public class PlayerMovement : NetworkBehaviour
     private float xRotation;
     private float sensitivity = 50f;
     private float sensMultiplier = 1f;
+    private bool paused = false;
 
     [Header("Movement")]
     public float moveSpeed = 4500;
@@ -80,7 +79,6 @@ public class PlayerMovement : NetworkBehaviour
         maxSpeedSaved = maxSpeed;
         sprintSpeed = maxSpeed * 2;
         playerScale = 2f;
-
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -104,22 +102,24 @@ public class PlayerMovement : NetworkBehaviour
     /// 
     private void MyInput()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !paused)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("Paused");
-            paused = true;
-            moveCamera.enabled = false;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            if(paused == false)
+            {
+                Debug.Log("Paused");
+                paused = true;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Debug.Log("Unpaused");
+                paused = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
-        else
-        {
-            Debug.Log("Unpaused");
-            paused = false;
-            moveCamera.enabled = true;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
+
 
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
@@ -276,6 +276,7 @@ public class PlayerMovement : NetworkBehaviour
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         //Perform the rotations
+        if(paused) { return; }
         playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
         orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
         playerGFX.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
