@@ -35,7 +35,7 @@ public class PlayerShoot : NetworkBehaviour
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, weapon.range, mask))
         {
-           if(hit.collider.CompareTag("PLAYER_TAG"))
+           if(hit.collider.CompareTag(PLAYER_TAG))
             {
                 CmdPlayerShot(hit.collider.name);
             }
